@@ -1,19 +1,12 @@
 [
   {
-    "name": "Contact",
+    "name": "Contact form opens support prompt",
     "steps": [
       {
+        "send": { "callback": "contact:form" },
         "expect": [
-          {
-            "method": "sendMessage",
-            "payload": {
-              "text": "Open support/contact form"
-            }
-          }
-        ],
-        "send": {
-          "callback": "contact:form"
-        }
+          { "method": "editMessageText", "payload": { "text": "How can we help? Type your message below and tap Send." } }
+        ]
       }
     ]
   }
