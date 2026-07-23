@@ -1,19 +1,12 @@
 [
   {
-    "name": "My bookings",
+    "name": "My bookings shows empty state when no bookings exist",
     "steps": [
       {
+        "send": { "callback": "booking:manage" },
         "expect": [
-          {
-            "method": "sendMessage",
-            "payload": {
-              "text": "View and manage existing bookings"
-            }
-          }
-        ],
-        "send": {
-          "callback": "booking:manage"
-        }
+          { "method": "editMessageText", "payload": { "text": "No bookings yet — tap 📅 Book service to schedule one." } }
+        ]
       }
     ]
   }

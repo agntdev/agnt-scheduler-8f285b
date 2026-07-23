@@ -1,19 +1,274 @@
 [
   {
-    "name": "Book service",
+    "name": "Book service shows available services",
     "steps": [
       {
+        "send": { "callback": "booking:start" },
         "expect": [
-          {
-            "method": "sendMessage",
-            "payload": {
-              "text": "Initiate service selection and scheduling flow"
-            }
-          }
-        ],
-        "send": {
-          "callback": "booking:start"
-        }
+          { "method": "sendMessage", "payload": { "text": "Choose a service:" } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Selecting a service shows date options",
+    "steps": [
+      {
+        "send": { "callback": "booking:start" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "Choose a service:" } }
+        ]
+      },
+      {
+        "send": { "callback": "svc:consult" },
+        "expect": [
+          { "method": "editMessageText", "payload": { "text": "Consultation — Pick a date:" } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Selecting a date shows time slots",
+    "steps": [
+      {
+        "send": { "callback": "booking:start" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "Choose a service:" } }
+        ]
+      },
+      {
+        "send": { "callback": "svc:consult" },
+        "expect": [
+          { "method": "editMessageText", "payload": { "text": "Consultation — Pick a date:" } }
+        ]
+      },
+      {
+        "send": { "callback": "dt:2026-07-24" },
+        "expect": [
+          { "method": "editMessageText", "payload": { "text": "Available times for Fri, Jul 24:" } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Selecting a time shows provider options",
+    "steps": [
+      {
+        "send": { "callback": "booking:start" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "Choose a service:" } }
+        ]
+      },
+      {
+        "send": { "callback": "svc:consult" },
+        "expect": [
+          { "method": "editMessageText", "payload": { "text": "Consultation — Pick a date:" } }
+        ]
+      },
+      {
+        "send": { "callback": "dt:2026-07-24" },
+        "expect": [
+          { "method": "editMessageText", "payload": { "text": "Available times for Fri, Jul 24:" } }
+        ]
+      },
+      {
+        "send": { "callback": "tm:10:00" },
+        "expect": [
+          { "method": "editMessageText", "payload": { "text": "Choose a provider:" } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Selecting a provider shows recurrence options",
+    "steps": [
+      {
+        "send": { "callback": "booking:start" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "Choose a service:" } }
+        ]
+      },
+      {
+        "send": { "callback": "svc:consult" },
+        "expect": [
+          { "method": "editMessageText", "payload": { "text": "Consultation — Pick a date:" } }
+        ]
+      },
+      {
+        "send": { "callback": "dt:2026-07-24" },
+        "expect": [
+          { "method": "editMessageText", "payload": { "text": "Available times for Fri, Jul 24:" } }
+        ]
+      },
+      {
+        "send": { "callback": "tm:10:00" },
+        "expect": [
+          { "method": "editMessageText", "payload": { "text": "Choose a provider:" } }
+        ]
+      },
+      {
+        "send": { "callback": "prov:p1" },
+        "expect": [
+          { "method": "editMessageText", "payload": { "text": "With Alex — One-time or recurring?" } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Selecting recurrence shows booking summary",
+    "steps": [
+      {
+        "send": { "callback": "booking:start" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "Choose a service:" } }
+        ]
+      },
+      {
+        "send": { "callback": "svc:consult" },
+        "expect": [
+          { "method": "editMessageText", "payload": { "text": "Consultation — Pick a date:" } }
+        ]
+      },
+      {
+        "send": { "callback": "dt:2026-07-24" },
+        "expect": [
+          { "method": "editMessageText", "payload": { "text": "Available times for Fri, Jul 24:" } }
+        ]
+      },
+      {
+        "send": { "callback": "tm:10:00" },
+        "expect": [
+          { "method": "editMessageText", "payload": { "text": "Choose a provider:" } }
+        ]
+      },
+      {
+        "send": { "callback": "prov:p1" },
+        "expect": [
+          { "method": "editMessageText", "payload": { "text": "With Alex — One-time or recurring?" } }
+        ]
+      },
+      {
+        "send": { "callback": "rec:once" },
+        "expect": [
+          { "method": "editMessageText", "payload": { "text": "Consultation — $50\nFri, Jul 24 at 10:00\nProvider: Alex\nOne-time" } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Confirming booking shows payment step",
+    "steps": [
+      {
+        "send": { "callback": "booking:start" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "Choose a service:" } }
+        ]
+      },
+      {
+        "send": { "callback": "svc:consult" },
+        "expect": [
+          { "method": "editMessageText", "payload": { "text": "Consultation — Pick a date:" } }
+        ]
+      },
+      {
+        "send": { "callback": "dt:2026-07-24" },
+        "expect": [
+          { "method": "editMessageText", "payload": { "text": "Available times for Fri, Jul 24:" } }
+        ]
+      },
+      {
+        "send": { "callback": "tm:10:00" },
+        "expect": [
+          { "method": "editMessageText", "payload": { "text": "Choose a provider:" } }
+        ]
+      },
+      {
+        "send": { "callback": "prov:p1" },
+        "expect": [
+          { "method": "editMessageText", "payload": { "text": "With Alex — One-time or recurring?" } }
+        ]
+      },
+      {
+        "send": { "callback": "rec:once" },
+        "expect": [
+          { "method": "editMessageText", "payload": { "text": "Consultation — $50\nFri, Jul 24 at 10:00\nProvider: Alex\nOne-time" } }
+        ]
+      },
+      {
+        "send": { "callback": "pay:confirm" },
+        "expect": [
+          { "method": "editMessageText", "payload": { "text": "Processing payment…" } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Processing payment completes booking",
+    "steps": [
+      {
+        "send": { "callback": "booking:start" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "Choose a service:" } }
+        ]
+      },
+      {
+        "send": { "callback": "svc:service" },
+        "expect": [
+          { "method": "editMessageText", "payload": { "text": "Standard Service — Pick a date:" } }
+        ]
+      },
+      {
+        "send": { "callback": "dt:2026-07-25" },
+        "expect": [
+          { "method": "editMessageText", "payload": { "text": "Available times for Sat, Jul 25:" } }
+        ]
+      },
+      {
+        "send": { "callback": "tm:14:00" },
+        "expect": [
+          { "method": "editMessageText", "payload": { "text": "Choose a provider:" } }
+        ]
+      },
+      {
+        "send": { "callback": "prov:auto" },
+        "expect": [
+          { "method": "editMessageText", "payload": { "text": "With Alex — One-time or recurring?" } }
+        ]
+      },
+      {
+        "send": { "callback": "rec:weekly" },
+        "expect": [
+          { "method": "editMessageText", "payload": { "text": "Standard Service — $100\nSat, Jul 25 at 14:00\nProvider: Alex\nRecurring: weekly" } }
+        ]
+      },
+      {
+        "send": { "callback": "pay:confirm" },
+        "expect": [
+          { "method": "editMessageText", "payload": { "text": "Processing payment…" } }
+        ]
+      },
+      {
+        "send": { "callback": "pay:process" },
+        "expect": [
+          { "method": "editMessageText", "payload": { "text": "Booking confirmed!\n\nService: Standard Service\nDate: Sat, Jul 25\nTime: 14:00\nProvider: Alex\nBooking ID: BK-service-2026-07-25-14:00\n\nPayment of $100 processed." } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Cancelling booking returns to menu",
+    "steps": [
+      {
+        "send": { "callback": "booking:start" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "Choose a service:" } }
+        ]
+      },
+      {
+        "send": { "callback": "bk:cancel" },
+        "expect": [
+          { "method": "editMessageText", "payload": { "text": "Booking cancelled." } }
+        ]
       }
     ]
   }
