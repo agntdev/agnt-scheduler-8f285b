@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Contact",
+    "steps": [
+      {
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Open support/contact form"
+            }
+          }
+        ],
+        "send": {
+          "callback": "contact:form"
+        }
+      }
+    ]
+  }
+]
